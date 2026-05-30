@@ -8,7 +8,7 @@ ACTION|ARGUMENT 1|ARGUMENT 2 ...
 
 ### Request types:
 |  Trigger  |  Arguments  |  What it does  | Finished |
-| --------  | ------- | ------- | ------- |
+| --------  | ------- | ------- | :-------: |
 | sync      | The JSON-ified version of the selected group/folder | Syncs changes between roblox studio and ORP | ❌️ |
 
 (more to come)
