@@ -5,7 +5,9 @@ local Window = require(script.Window)
 
 function ui.init(plugin:Plugin) : typeof(ui)
     ui.plugin = plugin
-    Window.init(plugin)
+    for _,v in script:GetChildren() do
+        require(v).init(plugin)
+    end
     return ui
 end
 

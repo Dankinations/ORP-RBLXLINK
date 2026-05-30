@@ -9,9 +9,16 @@
 - WEBSERVER - ORP - WEBSERVER - ORP - WEBSERVER - ORP - WEBSERVER - ORP - WEBSERVER - ORP -
 ]]
 
+
+export type WebserverType = {
+    Start:()->(),
+    Port:number,
+    Client:WebStreamClient
+}
+
 local HttpService = game:GetService("HttpService")
 
-local ws = {}
+local ws = {} :: WebserverType
 local connections:{RBXScriptConnection} = {}
 
 ws.Port = 2763
@@ -40,4 +47,4 @@ function ws.Start()
     end))
 end
 
-return ws
+return ws :: WebserverType
