@@ -11,9 +11,7 @@
 
 
 export type WebserverType = {
-    Start:()->(),
-    Port:number,
-    Client:WebStreamClient
+    Start:()->()
 }
 
 local HttpService = game:GetService("HttpService")

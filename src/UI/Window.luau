@@ -9,6 +9,7 @@ end
 
 export type WindowType = {
     dock:DockWidgetPluginGui,
+    holder:Frame,
     plugin:Plugin,
     SetVisible:(WindowType,boolean)->(),
     IsVisible:(WindowType)->(boolean),
@@ -26,8 +27,8 @@ function window.new() : WindowType
     self.dock.Title = "Test"
     local frame = Instance.new("Frame",self.dock)
     frame.Size = UDim2.fromScale(1, 1)
-    frame.BackgroundColor3 = Color3.new(0.152941, 0.160784, 0.239216)
-
+    frame.BackgroundColor3 = Color3.fromRGB(25, 26, 31)
+    self.holder = frame
     return self
 end
 
@@ -41,9 +42,19 @@ function window:IsVisible()
     return self.dock.Enabled
 end
 
-function window:AddElement(element:GuiBase)
+function window:AddElement(element:GuiBase|any)
     local self:WindowType = self
-    element.Parent = self.dock:FindFirstAncestorOfClass("Frame")
+    if typeof(element) == "Instance" then
+        if not element:IsA("GuiBase") then return end
+        element.Parent = self.holder
+    elseif typeof(element) == "table" then
+        assert(typeof(element)=="table")
+        for _,v in element do
+            if typeof(v) ~= "Instance" then continue end
+            if not v:IsA("GuiBase") then continue end
+            v.Parent = self.holder
+        end
+    end
     return element
 end
 
