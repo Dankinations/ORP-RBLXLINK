@@ -15,6 +15,7 @@ ACTION|ARGUMENT 1|ARGUMENT 2 ...
 | sync      | The JSON-ified version of the selected group/folder | Syncs changes between roblox studio and ORP | ❌️ |
 
 curent look at UI:
+
 <img width="568" height="291" alt="image" src="https://github.com/user-attachments/assets/77432ae5-bae5-4c96-ba11-7b61dd073e3f" />
 
 
