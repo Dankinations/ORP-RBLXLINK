@@ -11,7 +11,9 @@
 
 
 export type WebserverType = {
-    Start:()->()
+    Start:()->(boolean),
+    Stop:()->(),
+    Send:()->()
 }
 
 local HttpService = game:GetService("HttpService")
@@ -28,14 +30,16 @@ function ws.Start()
     for _,v:RBXScriptConnection in connections do
         v:Disconnect()
     end
+    table.clear(connections)
 
     local client:WebStreamClient = HttpService:CreateWebStreamClient(
         Enum.WebStreamClientType.WebSocket, {
-        `localhost:{ws.Port}`
+        ["Url"] = `ws://127.0.0.1:{ws.Port}`
     })
     ws.Client = client
 
     table.insert(connections,client.MessageReceived:Connect(function(msg: string)
+        print(`ORP-RBLXLINK: Received message: "{msg}"`)
         local split = msg:split("|")
         if #split <= 1 then error(`ORP-RBLXLINK: Invalid request ({msg})`) end
         local find = script:FindFirstChild(split[1]:lower())
@@ -43,6 +47,22 @@ function ws.Start()
         table.remove(split,1)
         require(find)(table.unpack(split))
     end))
+
+    print("ORP-RBLXLINK: Started listening to port "..ws.Port)
+    return true
+end
+
+function ws.Stop()
+    if ws.Client == nil then error("ORP-RBLXLINK: Can't stop client if it's not turned on!") end
+    local client:WebSocketClient = ws.Client
+    client:Close()
+    ws.Client = nil
+end
+
+function ws.Send(msg:string)
+    if ws.Client == nil then error("ORP-RBLXLINK: Can't send webserver message if it's not turned on!") end
+    local client:WebSocketClient = ws.Client
+    client:Send(msg)
 end
 
 return ws :: WebserverType

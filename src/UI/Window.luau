@@ -25,7 +25,8 @@ function window.new() : WindowType
     self.plugin = window.plugin :: Plugin
     self.dock = self.plugin:CreateDockWidgetPluginGuiAsync(`ORP_RBLXLINK_WINDOW_{tick()}`, dockInfo)
     self.dock.Title = "Test"
-    local frame = Instance.new("Frame",self.dock)
+    local frame = Instance.new("Frame")
+    frame.Parent = self.dock
     frame.Size = UDim2.fromScale(1, 1)
     frame.BackgroundColor3 = Color3.fromRGB(25, 26, 31)
     self.holder = frame
@@ -48,7 +49,6 @@ function window:AddElement(element:GuiBase|any)
         if not element:IsA("GuiBase") then return end
         element.Parent = self.holder
     elseif typeof(element) == "table" then
-        assert(typeof(element)=="table")
         for _,v in element do
             if typeof(v) ~= "Instance" then continue end
             if not v:IsA("GuiBase") then continue end
