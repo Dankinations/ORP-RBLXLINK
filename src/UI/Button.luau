@@ -1,7 +1,6 @@
 --!nolint LocalShadow
-local ServerStorage = game:GetService("ServerStorage")
 local TweenService = game:GetService("TweenService")
-local Signal = require(ServerStorage["ORP-RBLXLINK"].Libraries.Signal)
+local Signal = require(script.Parent.Parent.Libraries.Signal)
 local btn = {}
 btn.plugin = nil
 btn.__index = btn

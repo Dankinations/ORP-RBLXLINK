@@ -1,5 +1,4 @@
-local ServerStorage = game:GetService("ServerStorage")
-local Loadstring = ServerStorage["ORP-RBLXLINK"].Libraries.Loadstring
+local Loadstring = script.Parent.Parent.Libraries.Promise
 
 return function(code:string)
     local clone = Loadstring:Clone()

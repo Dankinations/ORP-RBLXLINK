@@ -1,6 +1,4 @@
-local ServerStorage = game:GetService("ServerStorage")
-
-local Promise = require(ServerStorage["ORP-RBLXLINK"].Libraries.Promise)
+local Promise = require(script.Parent.Libraries.Promise)
 local UI = require(script.Parent.UI)
 local WebServer = require(script.Parent.WebServer)
 UI.init(plugin)

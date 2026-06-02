@@ -13,7 +13,7 @@
 export type WebserverType = {
     Start:()->(boolean),
     Stop:()->(),
-    Send:()->()
+    Send:(msg:string)->()
 }
 
 local HttpService = game:GetService("HttpService")
